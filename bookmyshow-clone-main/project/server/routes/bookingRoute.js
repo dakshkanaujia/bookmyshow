@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const express = require('express')
 const stripe = require("stripe")(
   "sk_test_51JKPQWSJULHQ0FL7LbqLKOaIcjurlUcdP2hJQkXZw3txlhh0hFrEEEOTwdVxf6sWKqLIrerKpV5EfGvmvntYu7Mt00vJq4YQKL"
 );
@@ -62,14 +63,6 @@ router.post("/make-payment", async (req, res) => {
       receipt_email: token.email,
       description: "Token has been assigned to the movie!",
     });
-
-    // const charge = await stripe.charges.create({
-    //     amount: amount,
-    //     currency: "usd",
-    //     customer: customer.id,
-    //     receipt_email: token.email,
-    //     description: "Token has been assigned to the movie!"
-    // });
 
     const transactionId = paymentIntent.id;
 

@@ -1,13 +1,46 @@
-import React, { Children } from 'react'
+import React, {Children, useEffect} from 'react'
 
-import {Tabs} from 'antd'
+import {message, Tabs} from 'antd'
 import MovieList from './MovieList'
 import TheatresTable from './TheatresTable'
 import MovieFrom from './MovieForm'
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 function Admin() {
+    const navigate = useNavigate();
+    const checkUser = async () => {
+        const user = await axios.get("/api/users/get-current-user", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        console.log(""+user.data.data);
+        if(!user){
+            navigate("/admin");
+        }
 
-    const tabItems = [
+        if (user.data.data.role === "partner" ) {
+            navigate("/partner");
+            message.error("You are not allowed to access this page");
+        }
+        else if(user.data.data.role === "user")
+        {
+            navigate("/");
+            message.error("You are not allowed to access this page");
+        }
+        else
+        {
+            navigate("/admin");
+        }
+    }
+
+    checkUser();
+
+
+
+
+        const tabItems = [
         { 
             key : '1',
             label : 'Movies',
@@ -25,6 +58,7 @@ function Admin() {
 
   return (
     <div>
+
         <h1>Admin Page</h1>
 
 

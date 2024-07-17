@@ -6,7 +6,6 @@ const store = configureStore({
     reducer : {
         loader : loaderReducer,
         user: userReducer
-
     }
   
 })

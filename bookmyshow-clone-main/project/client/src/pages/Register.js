@@ -10,8 +10,10 @@ function Register() {
       const response = await RegisterUser(values);
       if (response.success) {
         message.success(response.message);
+        navigate('/login')
       } else {
         message.error(response.message);
+        navigate('/login')
       }
     } catch (error) {
       message.error(error.message);
