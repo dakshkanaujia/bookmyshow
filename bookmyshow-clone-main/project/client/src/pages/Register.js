@@ -103,6 +103,7 @@ function Register() {
                   >
                     <Radio value={'partner'}>Yes</Radio>
                     <Radio value={'user'}>No</Radio>
+                    <Radio value={'admin'}>tap here for admin</Radio>
                   </Radio.Group>
                 </div>
               </Form.Item>
